@@ -1,20 +1,17 @@
 "use client";
-
 import { motion } from "framer-motion";
-
 const items = [
-  "Health Management Certification",
-  "METI Certified",
-  "MHLW Certified",
-  "Occupational Physician",
+  "健康経営優良法人認定",
+  "経産省認定",
+  "厚労省認定",
+  "産業医連携",
   "ISO 45001",
-  "Stress Check Implementer",
-  "EAP Certified",
-  "Health Data Plan",
-  "Healthy Excellence Award",
-  "Smart Wellness",
+  "ストレスチェック実施",
+  "EAP認定",
+  "健康データ計画",
+  "健康優良企業表彰",
+  "スマートウェルネス",
 ];
-
 export default function MarqueeSection() {
   return (
     <div className="relative py-10 overflow-hidden border-y border-white/[0.04] bg-white/[0.01]">

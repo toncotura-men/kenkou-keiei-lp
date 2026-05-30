@@ -1,69 +1,45 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
-function CountUp({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-  useEffect(() => {
-    if (!isInView) return;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) { setCount(target); clearInterval(timer); }
-      else { setCount(Math.floor(current)); }
-    }, duration / steps);
-    return () => clearInterval(timer);
-  }, [isInView, target, duration]);
-  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
-}
+import { motion } from "framer-motion";
 const stats = [
-  { value: 500, suffix: "+", label: "Companies", description: "SMEs to listed companies" },
-  { value: 98, suffix: "%", label: "Cert Rate", description: "2x industry average" },
-  { value: 32, suffix: "%", label: "Turnover Reduction", description: "Average across clients" },
-  { value: 3.2, suffix: "x", label: "Productivity Gain", description: "Average ROI" },
+  { value: "500+", label: "支援企業数", sub: "中小企業から上場企業まで" },
+  { value: "98%", label: "認定取得率", sub: "業界平均の2倍" },
+  { value: "32%", label: "離職率改善", sub: "支援企業平均" },
+  { value: "3.2x", label: "生産性向上", sub: "平均ROI" },
 ];
-const features = [
-  { title: "Evidence-Based", description: "Scientific approach based on academic papers and government data for reliable results.", icon: "\u{1F52C}" },
-  { title: "Ongoing Support", description: "After certification, we keep improving the cycle for sustainable health management.", icon: "\u{1F91D}" },
-  { title: "Industry Expertise", description: "Specialized knowledge across 20+ industries including manufacturing, IT, retail, and healthcare.", icon: "\u{1F3ED}" },
-  { title: "Digital + Human", description: "Merging technology and human expertise. Data-driven measures with warm, personal support.", icon: "\u{1F4BB}" },
+const feats = [
+  { icon: "\u{1F52C}", title: "エビデンスベース", desc: "学術論文・政府データに基づく科学的アプローチで施策を設計します。" },
+  { icon: "\u{1F91D}", title: "継続サポート", desc: "認定取得後も継続的な改善サイクルで組織の健康経営を底上げします。" },
+  { icon: "\u{1F3ED}", title: "業種特化の知見", desc: "製造・IT・小売・医療など業種ごとの課題に対応した支援を提供します。" },
+  { icon: "\u{1F4BB}", title: "デジタル×人間", desc: "テクノロジーと人的サポートを組み合わせた最適なソリューションを届けます。" },
 ];
 export default function ResultsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   return (
-    <section id="results" className="py-32 px-6 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black to-[#020208]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full opacity-5"
-          style={{ background: "radial-gradient(circle, #2997ff 0%, transparent 70%)" }} />
-      </div>
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <span className="text-green-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Results</span>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">Numbers Prove<br /><span className="gradient-text">Proven Results</span></h2>
+    <section id="results" className="relative py-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-16">
+          <p className="text-sm text-white/40 tracking-widest uppercase mb-4">Results</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">実績・数字で見る成果</h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">500社以上の支援実績が証明する、確かな効果</p>
         </motion.div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
-          {stats.map((stat, i) => (
-            <motion.div key={stat.label} initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.6, delay: i * 0.1 }} className="text-center p-8 rounded-2xl glass border border-white/[0.06]">
-              <div className="text-4xl md:text-5xl font-bold gradient-text-blue mb-2"><CountUp target={stat.value} suffix={stat.suffix} /></div>
-              <div className="text-white font-semibold mb-1">{stat.label}</div>
-              <div className="text-white/40 text-sm">{stat.description}</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {stats.map((s, i) => (
+            <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="glass rounded-2xl p-6 text-center border border-white/[0.06]">
+              <div className="text-4xl font-bold gradient-text-blue mb-2">{s.value}</div>
+              <div className="text-white font-medium text-sm mb-1">{s.label}</div>
+              <div className="text-white/40 text-xs">{s.sub}</div>
             </motion.div>
           ))}
         </div>
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.4 }} className="text-center mb-12">
-          <h3 className="text-3xl md:text-4xl font-bold text-white">4 Reasons Clients Choose Us</h3>
-        </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => (
-            <motion.div key={feature.title} initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }} className="p-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
-              <div className="text-3xl mb-4">{feature.icon}</div>
-              <h4 className="text-white font-bold text-lg mb-2">{feature.title}</h4>
-              <p className="text-white/50 text-sm leading-relaxed">{feature.description}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {feats.map((f, i) => (
+            <motion.div key={i} initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="glass rounded-2xl p-6 border border-white/[0.06] flex gap-4">
+              <div className="text-3xl shrink-0">{f.icon}</div>
+              <div>
+                <h3 className="text-white font-semibold text-lg mb-2">{f.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

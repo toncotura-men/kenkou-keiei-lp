@@ -1,49 +1,35 @@
 "use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-const services = [
-  { icon: "trophy", title: "Health Management\nCertification Support", description: "Full support from application documents for METI certification to post-certification branding.", color: "from-blue-500/20 to-blue-600/5", accent: "#2997ff", items: ["Document Preparation", "Audit Strategy", "Annual Renewal"] },
-  { icon: "bulb", title: "Wellness\nProgram Design", description: "Evidence-based wellness programs customized for your company size and industry.", color: "from-green-500/20 to-green-600/5", accent: "#30d158", items: ["Mental Health Care", "Exercise Habits", "Nutrition Program"] },
-  { icon: "chart", title: "Health Data\nAnalytics", description: "Integrated analysis of health checkups, stress checks, and wearable data.", color: "from-purple-500/20 to-purple-600/5", accent: "#bf5af2", items: ["Risk Scoring", "Department Heatmap", "ROI Measurement"] },
-  { icon: "mind", title: "Mental Health\nSupport", description: "Comprehensive support from stress check implementation to EAP program management.", color: "from-orange-500/20 to-orange-600/5", accent: "#ff9f0a", items: ["Stress Check", "High-Risk Follow-up", "Manager Training"] },
-  { icon: "target", title: "Health Management\nConsulting", description: "From strategic planning aligned with management goals to building internal promotion structures.", color: "from-red-500/20 to-red-600/5", accent: "#ff375f", items: ["Strategy & KPI Design", "Structure Building", "Internal Promotion"] },
-  { icon: "handshake", title: "Occupational Health\nOutsourcing", description: "Full outsourcing of occupational health functions for SMEs.", color: "from-teal-500/20 to-teal-600/5", accent: "#5ac8fa", items: ["Physician Coordination", "On-site Nurse Service", "Safety Committee"] },
+import { motion } from "framer-motion";
+const svcs = [
+  { icon: "\u{1F3C6}", title: "健康経営優良法人\n認定支援", desc: "経産省の認定申請を完全サポート。書類作成から審査対策まで一貫して対応します。", tags: ["申請書類作成","審査対策","更新サポート"] },
+  { icon: "\u{1F4AA}", title: "ウェルネス\nプログラム設計", desc: "従業員の心身の健康を総合的にサポートするプログラムを設計・実施します。", tags: ["メンタルヘルス","フィジカルケア","ストレス管理"] },
+  { icon: "\u{1F4CA}", title: "健康データ\n分析・活用", desc: "健診データ・ストレスチェックをAIで分析し、効果的な施策を立案します。", tags: ["データ可視化","リスク予測","ROI測定"] },
+  { icon: "\u{1F91D}", title: "産業保健\nコンサルティング", desc: "産業医・保健師と連携し、職場の健康管理体制を整備します。", tags: ["産業医選定","保健師連携","衛生委員会"] },
+  { icon: "\u{1F4BB}", title: "デジタル健康\nマネジメント", desc: "最新のデジタルツールで従業員の健康状態をリアルタイムに把握・管理します。", tags: ["健康アプリ","ウェアラブル連携","ダッシュボード"] },
+  { icon: "\u{1F4DA}", title: "健康経営\n教育・研修", desc: "経営層から従業員まで、健康経営の理解と実践力を高める研修を提供します。", tags: ["管理職研修","全社員研修","e-ラーニング"] },
 ];
 export default function ServicesSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   return (
-    <section id="services" className="py-32 px-6 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#050510] to-black" />
-      <div className="max-w-7xl mx-auto relative z-10" ref={ref}>
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <span className="text-blue-400 text-sm font-semibold tracking-widest uppercase mb-4 block">Services</span>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">Health Management<br /><span className="gradient-text">from Every Angle</span></h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">From certification to continuous improvement. Six services supporting your health management end-to-end.</p>
+    <section id="services" className="relative py-24 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-16">
+          <p className="text-sm text-white/40 tracking-widest uppercase mb-4">Services</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">サービス一覧</h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">健康経営の全フェーズをカバーする6つのサービス</p>
         </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, i) => (
-            <motion.div key={service.title} initial={{ opacity: 0, y: 60 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: i * 0.1 }} whileHover={{ y: -8, scale: 1.01 }}
-              className="relative rounded-2xl p-8 border border-white/[0.08] cursor-pointer group overflow-hidden bg-white/[0.02]">
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                style={{ background: `radial-gradient(circle at 50% 50%, ${service.accent}15 0%, transparent 70%)` }} />
-              <div className="text-4xl mb-4">
-                {service.icon === "trophy" && "\u{1F3C6}"}
-                {service.icon === "bulb" && "\u{1F4A1}"}
-                {service.icon === "chart" && "\u{1F4CA}"}
-                {service.icon === "mind" && "\u{1F9D8}"}
-                {service.icon === "target" && "\u{1F3AF}"}
-                {service.icon === "handshake" && "\u{1F91D}"}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3 whitespace-pre-line leading-tight">{service.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed mb-5">{service.description}</p>
-              <ul className="space-y-1.5">
-                {service.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-white/60">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: service.accent }} />{item}
-                  </li>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {svcs.map((s, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="glass rounded-2xl p-6 border border-white/[0.06] hover:border-blue-500/30 transition-colors">
+              <div className="text-4xl mb-4">{s.icon}</div>
+              <h3 className="text-xl font-semibold text-white mb-3 whitespace-pre-line">{s.title}</h3>
+              <p className="text-white/50 text-sm leading-relaxed mb-4">{s.desc}</p>
+              <div className="flex flex-wrap gap-2">
+                {s.tags.map((tag, j) => (
+                  <span key={j} className="text-xs text-blue-400/70 bg-blue-500/10 px-2 py-1 rounded-full border border-blue-500/20">{tag}</span>
                 ))}
-              </ul>
+              </div>
             </motion.div>
           ))}
         </div>
