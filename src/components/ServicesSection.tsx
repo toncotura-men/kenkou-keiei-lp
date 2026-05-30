@@ -54,9 +54,10 @@ const container = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
 };
+
 const item = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 export default function ServicesSection() {
@@ -84,7 +85,6 @@ export default function ServicesSection() {
         </motion.div>
 
         <motion.div
-          ref={ref}
           variants={container}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -108,9 +108,7 @@ export default function ServicesSection() {
                   {s.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-bold text-gray-900 text-lg">{s.title}</h3>
-                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">{s.title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
                   <span className={`inline-block mt-4 px-3 py-1 rounded-full text-xs font-semibold ${
                     s.color === "emerald"

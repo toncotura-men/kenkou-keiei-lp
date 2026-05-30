@@ -9,7 +9,7 @@ const testimonials = [
     name: "田中 誠一",
     role: "人事部長",
     company: "大手製造業（従業員数 3,200名）",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&faces",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop",
     rating: 5,
     tag: "製造業",
   },
@@ -37,9 +37,10 @@ const container = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.15 } },
 };
+
 const card = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65 } },
 };
 
 export default function TestimonialsSection() {
@@ -86,13 +87,10 @@ export default function TestimonialsSection() {
                   </svg>
                 ))}
               </div>
-
               <svg className="w-8 h-8 text-emerald-200 mb-4 flex-shrink-0" fill="currentColor" viewBox="0 0 32 32">
                 <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H7.9C8.4 11.7 9.9 10 12 9.4L10 8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6.1c.5-2.3 2-4 4.1-4.6L24 8z" />
               </svg>
-
               <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">{t.quote}</p>
-
               <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-emerald-100">
                   <Image src={t.img} alt={t.name} fill className="object-cover" />

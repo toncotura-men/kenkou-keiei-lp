@@ -1,6 +1,5 @@
-@import "tailwindcss";
-
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
 
 html {
   scroll-behavior: smooth;
@@ -9,7 +8,6 @@ html {
 body {
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: #111827;
   background: #ffffff;
 }
@@ -17,9 +15,4 @@ body {
 ::selection {
   background-color: #d1fae5;
   color: #065f46;
-}
-
-:focus-visible {
-  outline: 2px solid #059669;
-  outline-offset: 2px;
 }

@@ -1,4 +1,13 @@
 {
+  "name": "kenkou-keiei-lp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
     "framer-motion": "^12.40.0",
