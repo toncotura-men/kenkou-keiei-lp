@@ -1,17 +1,14 @@
 "use client";
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-
 const services = [
   { icon: "trophy", title: "Health Management\nCertification Support", description: "Full support from application documents for METI certification to post-certification branding.", color: "from-blue-500/20 to-blue-600/5", accent: "#2997ff", items: ["Document Preparation", "Audit Strategy", "Annual Renewal"] },
   { icon: "bulb", title: "Wellness\nProgram Design", description: "Evidence-based wellness programs customized for your company size and industry.", color: "from-green-500/20 to-green-600/5", accent: "#30d158", items: ["Mental Health Care", "Exercise Habits", "Nutrition Program"] },
-  { icon: "chart", title: "Health Data\nAnalytics", description: "Integrated analysis of health checkups, stress checks, and wearable data to visualize organizational health risks.", color: "from-purple-500/20 to-purple-600/5", accent: "#bf5af2", items: ["Risk Scoring", "Department Heatmap", "ROI Measurement"] },
-  { icon: "mind", title: "Mental Health\nSupport", description: "Comprehensive support from stress check implementation with occupational physicians to EAP program management.", color: "from-orange-500/20 to-orange-600/5", accent: "#ff9f0a", items: ["Stress Check", "High-Risk Follow-up", "Manager Training"] },
+  { icon: "chart", title: "Health Data\nAnalytics", description: "Integrated analysis of health checkups, stress checks, and wearable data.", color: "from-purple-500/20 to-purple-600/5", accent: "#bf5af2", items: ["Risk Scoring", "Department Heatmap", "ROI Measurement"] },
+  { icon: "mind", title: "Mental Health\nSupport", description: "Comprehensive support from stress check implementation to EAP program management.", color: "from-orange-500/20 to-orange-600/5", accent: "#ff9f0a", items: ["Stress Check", "High-Risk Follow-up", "Manager Training"] },
   { icon: "target", title: "Health Management\nConsulting", description: "From strategic planning aligned with management goals to building internal promotion structures.", color: "from-red-500/20 to-red-600/5", accent: "#ff375f", items: ["Strategy & KPI Design", "Structure Building", "Internal Promotion"] },
-  { icon: "handshake", title: "Occupational Health\nOutsourcing", description: "Full outsourcing of occupational health functions for SMEs who have difficulty securing specialist personnel.", color: "from-teal-500/20 to-teal-600/5", accent: "#5ac8fa", items: ["Physician Coordination", "On-site Nurse Service", "Safety Committee"] },
+  { icon: "handshake", title: "Occupational Health\nOutsourcing", description: "Full outsourcing of occupational health functions for SMEs.", color: "from-teal-500/20 to-teal-600/5", accent: "#5ac8fa", items: ["Physician Coordination", "On-site Nurse Service", "Safety Committee"] },
 ];
-
 export default function ServicesSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -31,12 +28,12 @@ export default function ServicesSection() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
                 style={{ background: `radial-gradient(circle at 50% 50%, ${service.accent}15 0%, transparent 70%)` }} />
               <div className="text-4xl mb-4">
-                {service.icon === "trophy" && "醇"}
-                {service.icon === "bulb" && "庁"}
-                {service.icon === "chart" && "投"}
-                {service.icon === "mind" && "ｧ・}
-                {service.icon === "target" && "識"}
-                {service.icon === "handshake" && "､・}
+                {service.icon === "trophy" && "\u{1F3C6}"}
+                {service.icon === "bulb" && "\u{1F4A1}"}
+                {service.icon === "chart" && "\u{1F4CA}"}
+                {service.icon === "mind" && "\u{1F9D8}"}
+                {service.icon === "target" && "\u{1F3AF}"}
+                {service.icon === "handshake" && "\u{1F91D}"}
               </div>
               <h3 className="text-xl font-bold text-white mb-3 whitespace-pre-line leading-tight">{service.title}</h3>
               <p className="text-white/50 text-sm leading-relaxed mb-5">{service.description}</p>

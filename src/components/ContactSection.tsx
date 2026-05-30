@@ -1,10 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 type FormData = { company: string; name: string; email: string; phone: string; employees: string; message: string; };
-
 export default function ContactSection() {
   const [form, setForm] = useState<FormData>({ company: "", name: "", email: "", phone: "", employees: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -87,7 +84,7 @@ export default function ContactSection() {
           </AnimatePresence>
         </motion.div>
         <div className="grid sm:grid-cols-3 gap-4 mt-8">
-          {[{ icon: "到", label: "Phone", value: "03-0000-0000", sub: "Weekdays 9:00-18:00" }, { icon: "笨会ｸ・, label: "Email", value: "hello@healthforce.jp", sub: "24/7 reception" }, { icon: "町", label: "Online", value: "Zoom / Teams", sub: "Nationwide" }].map((item) => (
+          {[{ icon: "\u{1F4DE}", label: "Phone", value: "03-0000-0000", sub: "Weekdays 9:00-18:00" }, { icon: "\u2709", label: "Email", value: "hello@healthforce.jp", sub: "24/7 reception" }, { icon: "\u{1F4AC}", label: "Online", value: "Zoom / Teams", sub: "Nationwide" }].map((item) => (
             <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] text-center">
               <div className="text-2xl mb-2">{item.icon}</div>
               <div className="text-white/40 text-xs mb-1">{item.label}</div>

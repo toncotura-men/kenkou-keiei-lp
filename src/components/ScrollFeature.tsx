@@ -1,15 +1,12 @@
 "use client";
-
 import { useRef } from "react";
 import { motion } from "framer-motion";
-
 const steps = [
-  { step: "01", title: "Analysis &\nDiagnosis", description: "We collect and analyze quantitative data including health checkup results, stress check data, and turnover rates to scientifically identify your company's unique health challenges.", visual: { bg: "from-blue-900/30 to-blue-800/10", icon: "搭", items: ["Health Data Analysis", "Stress Check Review", "Lifestyle Risk Assessment"] } },
-  { step: "02", title: "Strategy &\nRoadmap", description: "Aligned with management goals, we set KPIs and create a 3-year health management promotion plan from certification acquisition to continuous improvement.", visual: { bg: "from-green-900/30 to-green-800/10", icon: "亮・・, items: ["KPI & Goal Setting", "Priority Measures", "Budget Planning"] } },
-  { step: "03", title: "Implementation &\nPrograms", description: "Based on the plan, we deploy wellness programs including proper health checkups, stress checks, and exercise, diet, and smoking cessation programs.", visual: { bg: "from-purple-900/30 to-purple-800/10", icon: "噫", items: ["Wellness Programs", "Health Events", "Online Training"] } },
-  { step: "04", title: "Measurement &\nImprovement", description: "We quantitatively measure and visualize the effectiveness of measures. Running PDCA cycles to continuously improve health management quality.", visual: { bg: "from-orange-900/30 to-orange-800/10", icon: "嶋", items: ["ROI Reports", "Improvement Proposals", "Advanced Certification"] } },
+  { step: "01", title: "Analysis &\nDiagnosis", description: "We collect and analyze quantitative data including health checkup results, stress check data, and turnover rates to identify your company health challenges.", visual: { bg: "from-blue-900/30 to-blue-800/10", icon: "\u{1F4CB}", items: ["Health Data Analysis", "Stress Check Review", "Lifestyle Risk Assessment"] } },
+  { step: "02", title: "Strategy &\nRoadmap", description: "Aligned with management goals, we set KPIs and create a 3-year health management promotion plan from certification acquisition to continuous improvement.", visual: { bg: "from-green-900/30 to-green-800/10", icon: "\u{1F5FA}", items: ["KPI & Goal Setting", "Priority Measures", "Budget Planning"] } },
+  { step: "03", title: "Implementation &\nPrograms", description: "Based on the plan, we deploy wellness programs including proper health checkups, stress checks, and exercise, diet, and smoking cessation programs.", visual: { bg: "from-purple-900/30 to-purple-800/10", icon: "\u{1F680}", items: ["Wellness Programs", "Health Events", "Online Training"] } },
+  { step: "04", title: "Measurement &\nImprovement", description: "We quantitatively measure and visualize the effectiveness of measures. Running PDCA cycles to continuously improve health management quality.", visual: { bg: "from-orange-900/30 to-orange-800/10", icon: "\u{1F4C8}", items: ["ROI Reports", "Improvement Proposals", "Advanced Certification"] } },
 ];
-
 export default function ScrollFeature() {
   const containerRef = useRef<HTMLDivElement>(null);
   return (

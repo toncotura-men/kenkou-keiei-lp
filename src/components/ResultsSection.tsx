@@ -1,8 +1,6 @@
 "use client";
-
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
-
 function CountUp({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -21,21 +19,18 @@ function CountUp({ target, suffix = "", duration = 2000 }: { target: number; suf
   }, [isInView, target, duration]);
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
 }
-
 const stats = [
   { value: 500, suffix: "+", label: "Companies", description: "SMEs to listed companies" },
   { value: 98, suffix: "%", label: "Cert Rate", description: "2x industry average" },
   { value: 32, suffix: "%", label: "Turnover Reduction", description: "Average across clients" },
   { value: 3.2, suffix: "x", label: "Productivity Gain", description: "Average ROI" },
 ];
-
 const features = [
-  { title: "Evidence-Based", description: "Scientific approach based on academic papers and government data for reliable results.", icon: "溌" },
-  { title: "Ongoing Support", description: "After certification, we keep improving the cycle for sustainable health management.", icon: "､・ },
-  { title: "Industry Expertise", description: "Specialized knowledge across 20+ industries including manufacturing, IT, retail, and healthcare.", icon: "少" },
-  { title: "Digital + Human", description: "Merging technology and human expertise. Data-driven measures with warm, personal support.", icon: "捗" },
+  { title: "Evidence-Based", description: "Scientific approach based on academic papers and government data for reliable results.", icon: "\u{1F52C}" },
+  { title: "Ongoing Support", description: "After certification, we keep improving the cycle for sustainable health management.", icon: "\u{1F91D}" },
+  { title: "Industry Expertise", description: "Specialized knowledge across 20+ industries including manufacturing, IT, retail, and healthcare.", icon: "\u{1F3ED}" },
+  { title: "Digital + Human", description: "Merging technology and human expertise. Data-driven measures with warm, personal support.", icon: "\u{1F4BB}" },
 ];
-
 export default function ResultsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
