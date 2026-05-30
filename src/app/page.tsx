@@ -1,4 +1,4 @@
-﻿import Navigation from "@/components/Navigation";
+import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import MarqueeSection from "@/components/MarqueeSection";
 import ServicesSection from "@/components/ServicesSection";
