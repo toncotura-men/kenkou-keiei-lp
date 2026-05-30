@@ -1,30 +1,37 @@
 "use client";
 import { motion } from "framer-motion";
-const items = [
-  "健康経営優良法人認定",
-  "経産省認定",
-  "厚労省認定",
-  "産業医連携",
-  "ISO 45001",
-  "ストレスチェック実施",
-  "EAP認定",
-  "健康データ計画",
-  "健康優良企業表彰",
-  "スマートウェルネス",
+
+const companies = [
+  "株式会社グリーン製造", "テクノロジー東京", "フューチャーワークス株式会社",
+  "メディカルホールディングス", "スマートオフィス", "ヘルスケアパートナーズ",
+  "未来建設株式会社", "デジタルフォース", "グローバルトレード",
+  "イノベーションラボ", "ライフスタイル東京", "プレミアムケア株式会社",
 ];
+
+const tripled = [...companies, ...companies, ...companies];
+
 export default function MarqueeSection() {
   return (
-    <div className="relative py-10 overflow-hidden border-y border-white/[0.04] bg-white/[0.01]">
-      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-black to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-black to-transparent" />
-      <motion.div className="flex gap-12 whitespace-nowrap"
-        animate={{ x: [0, "-50%"] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
-        {[...items, ...items].map((item, i) => (
-          <span key={i} className="text-white/20 text-sm font-medium tracking-wider flex-shrink-0 flex items-center gap-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400/40" />{item}
-          </span>
-        ))}
-      </motion.div>
-    </div>
+    <section className="py-14 bg-gray-50 border-y border-gray-100 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 text-center mb-8">
+        <p className="text-xs font-bold text-gray-400 uppercase tracking-[0.25em]">
+          全国 500 社以上の企業に導入されています
+        </p>
+      </div>
+      <div className="relative flex overflow-hidden select-none">
+        <motion.div
+          className="flex gap-14 flex-shrink-0 pr-14"
+          animate={{ x: [0, "-33.333%"] }}
+          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        >
+          {tripled.map((name, i) => (
+            <div key={i} className="inline-flex items-center gap-3 flex-shrink-0">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
+              <span className="text-gray-400 font-semibold text-sm whitespace-nowrap">{name}</span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }

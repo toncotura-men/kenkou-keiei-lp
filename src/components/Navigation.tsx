@@ -1,64 +1,112 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-const navItems = [
-  { label: "サービス", href: "#services" },
-  { label: "実績", href: "#results" },
-  { label: "プロセス", href: "#cases" },
-  { label: "料金", href: "#pricing" },
-  { label: "お問い合わせ", href: "#contact" },
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const navLinks = [
+  { href: "#services", label: "サービス" },
+  { href: "#results", label: "導入実績" },
+  { href: "#testimonials", label: "お客様の声" },
+  { href: "#pricing", label: "料金" },
 ];
+
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fn = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
-  const handleNavClick = (href: string) => {
-    setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+
   return (
-    <>
-      <motion.div className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 via-green-400 to-yellow-400 z-[100]" style={{ width: progressWidth }} />
-      <motion.header className="fixed top-0 left-0 right-0 z-50" initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-        <div className={`px-6 md:px-12 py-4 transition-all duration-500 ${scrolled ? "bg-black/80 backdrop-blur-2xl border-b border-white/10" : "bg-transparent"}`}>
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-green-400 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white fill-current"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" /></svg>
-              </div>
-              <span className="text-white font-semibold text-lg">Health<span className="gradient-text-blue">Force</span></span>
-            </button>
-            <nav className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <button key={item.href} onClick={() => handleNavClick(item.href)} className="text-sm text-white/70 hover:text-white transition-colors">{item.label}</button>
-              ))}
-            </nav>
-            <div className="hidden md:flex">
-              <button onClick={() => handleNavClick("#contact")} className="px-5 py-2 text-sm font-medium bg-blue-500 hover:bg-blue-400 text-white rounded-full transition-all">無料相談</button>
+    <motion.nav
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          <a href="#" className="flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center shadow-sm">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
             </div>
-            <button className="md:hidden w-8 h-8 flex flex-col justify-center gap-[5px]" onClick={() => setMenuOpen(!menuOpen)}>
-              <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} className="block h-[1.5px] bg-white w-full origin-center" />
-              <motion.span animate={{ opacity: menuOpen ? 0 : 1 }} className="block h-[1.5px] bg-white w-full" />
-              <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }} className="block h-[1.5px] bg-white w-full origin-center" />
-            </button>
-          </div>
-        </div>
-        <motion.div initial={false} animate={{ height: menuOpen ? "auto" : 0, opacity: menuOpen ? 1 : 0 }} className="overflow-hidden bg-black/95 backdrop-blur-2xl border-b border-white/10">
-          <nav className="px-6 py-4 flex flex-col gap-4">
-            {navItems.map((item) => (
-              <button key={item.href} onClick={() => handleNavClick(item.href)} className="text-left text-white/80 hover:text-white py-2 border-b border-white/5 text-lg">{item.label}</button>
+            <span className="font-bold text-xl text-gray-900 tracking-tight">
+              Health<span className="text-emerald-600">Force</span>
+            </span>
+          </a>
+
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-gray-600 hover:text-emerald-600 font-medium text-sm transition-colors duration-150"
+              >
+                {link.label}
+              </a>
             ))}
-            <button onClick={() => handleNavClick("#contact")} className="mt-2 px-5 py-3 text-sm font-medium bg-blue-500 text-white rounded-full">無料相談</button>
-          </nav>
-        </motion.div>
-      </motion.header>
-    </>
+          </div>
+
+          <div className="hidden md:flex items-center gap-3">
+            <a href="tel:0120-XXX-XXX" className="text-sm text-gray-500 font-medium">
+              0120-XXX-XXX
+            </a>
+            <a
+              href="#contact"
+              className="px-5 py-2.5 bg-emerald-600 text-white rounded-full font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-md hover:shadow-lg"
+            >
+              無料相談はこちら
+            </a>
+          </div>
+
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden p-2 text-gray-600 rounded-lg"
+            aria-label="メニュー"
+          >
+            <div className={`w-5 h-0.5 bg-current transition-all duration-300 ${open ? "rotate-45 translate-y-[5px]" : "mb-1.5"}`} />
+            <div className={`w-5 h-0.5 bg-current transition-all duration-300 ${open ? "opacity-0" : "mb-1.5"}`} />
+            <div className={`w-5 h-0.5 bg-current transition-all duration-300 ${open ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
+          >
+            <div className="px-4 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 px-2 text-gray-700 text-sm font-medium border-b border-gray-50 last:border-0"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                className="block mt-4 px-5 py-3 bg-emerald-600 text-white rounded-full font-semibold text-sm text-center"
+              >
+                無料相談はこちら
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

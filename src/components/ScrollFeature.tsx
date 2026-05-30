@@ -1,36 +1,114 @@
 "use client";
-import { motion } from "framer-motion";
-const steps = [
-  { num: "01", title: "分析・診断", icon: "\u{1F4CB}", desc: "現状の健康データを多角的に分析し、課題を明確化します。", items: ["健康データ分析","ストレスチェック精査","生活習慣リスク評価"] },
-  { num: "02", title: "戦略・ロードマップ", icon: "\u{1F5FA}", desc: "分析結果をもとに、実行可能な健康経営戦略を策定します。", items: ["KPI・目標設定","優先施策の絞り込み","予算計画"] },
-  { num: "03", title: "施策・プログラム実施", icon: "\u{1F680}", desc: "カスタマイズされたウェルネスプログラムを展開します。", items: ["ウェルネスプログラム","健康イベント","オンライン研修"] },
-  { num: "04", title: "測定・改善", icon: "\u{1F4C8}", desc: "効果を定量的に測定し、継続的な改善を推進します。", items: ["ROIレポート","改善提案","上位認定へのアップグレード"] },
+import Image from "next/image";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+const features = [
+  {
+    tag: "データ活用",
+    title: "健康データを、\n経営の武器に変える",
+    desc: "健診結果・ストレスチェック・勤怠情報を一元管理し、独自のアルゴリズムで組織の健康リスクを可視化。役員会議で使えるレポートを自動生成します。",
+    points: ["リアルタイムダッシュボード", "部署別リスク分析", "ROI試算レポート"],
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop",
+    alt: "データ分析ダッシュボード",
+    reverse: false,
+  },
+  {
+    tag: "専門家サポート",
+    title: "全国トップクラスの\n専門家チームが伴走",
+    desc: "産業医・保健師・心理士・管理栄養士など多職種の専門家が連携。従業員一人ひとりに寄り添ったきめ細かなサポートを提供します。",
+    points: ["全国200名以上の専門家ネットワーク", "業界特化の産業医マッチング", "24時間相談窓口"],
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80&auto=format&fit=crop",
+    alt: "専門家チームによるサポート",
+    reverse: true,
+  },
+  {
+    tag: "継続的改善",
+    title: "PDCAで回す、\n持続可能な健康経営",
+    desc: "単発の施策ではなく、計画・実施・評価・改善のサイクルを確立。毎月の進捗レビューと四半期ごとの戦略見直しで、継続的に成果を高めます。",
+    points: ["月次KPIモニタリング", "経営層向け四半期報告", "ベンチマーク比較分析"],
+    img: "https://images.unsplash.com/photo-1531498860502-7c67cf519b9e?w=800&q=80&auto=format&fit=crop",
+    alt: "チームミーティングでのPDCA",
+    reverse: false,
+  },
 ];
-export default function ScrollFeature() {
+
+function FeatureBlock({ feature, index }: { feature: typeof features[0]; index: number }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.25 });
+
   return (
-    <section id="cases" className="relative py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-16">
-          <p className="text-sm text-white/40 tracking-widest uppercase mb-4">Process</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">支援プロセス</h2>
-          <p className="text-white/50 text-lg max-w-xl mx-auto">4つのステップで健康経営を実現</p>
+    <div ref={ref} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${index > 0 ? "pt-20 border-t border-gray-100" : ""}`}>
+      <motion.div
+        initial={{ opacity: 0, x: feature.reverse ? 40 : -40 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className={feature.reverse ? "lg:order-2" : ""}
+      >
+        <span className="inline-block px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold mb-5">
+          {feature.tag}
+        </span>
+        <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-5 leading-snug whitespace-pre-line">
+          {feature.title}
+        </h3>
+        <p className="text-gray-500 leading-relaxed mb-8">{feature.desc}</p>
+        <ul className="space-y-3">
+          {feature.points.map((p) => (
+            <li key={p} className="flex items-center gap-3 text-sm text-gray-700">
+              <span className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                <svg className="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              {p}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: feature.reverse ? -40 : 40, scale: 0.97 }}
+        animate={inView ? { opacity: 1, x: 0, scale: 1 } : {}}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+        className={`relative ${feature.reverse ? "lg:order-1" : ""}`}
+      >
+        <div className={`absolute inset-0 rounded-3xl ${feature.reverse ? "bg-amber-100" : "bg-emerald-100"} translate-x-4 translate-y-4`} />
+        <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
+          <Image src={feature.img} alt={feature.alt} fill className="object-cover" />
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+export default function ScrollFeature() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+
+  return (
+    <section className="py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
+        >
+          <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+            Features
+          </span>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            HealthForceが選ばれる3つの理由
+          </h2>
+          <p className="text-gray-500 text-lg max-w-xl mx-auto">
+            他社との圧倒的な差別化ポイントをご紹介します
+          </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="glass rounded-2xl p-6 border border-white/[0.06] relative overflow-hidden">
-              <div className="absolute top-4 right-4 text-5xl font-black text-white/[0.04]">{step.num}</div>
-              <div className="text-3xl mb-4">{step.icon}</div>
-              <h3 className="text-white font-semibold text-lg mb-2">{step.title}</h3>
-              <p className="text-white/40 text-sm mb-4 leading-relaxed">{step.desc}</p>
-              <ul className="space-y-1.5">
-                {step.items.map((item, j) => (
-                  <li key={j} className="flex items-center gap-2 text-xs text-white/50">
-                    <span className="w-1 h-1 rounded-full bg-blue-400/50 shrink-0" />{item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+
+        <div className="space-y-20">
+          {features.map((f, i) => (
+            <FeatureBlock key={f.title} feature={f} index={i} />
           ))}
         </div>
       </div>
