@@ -7,6 +7,14 @@
 
 - 資料（スライド）を作ったら、**全スライドに発表者メモ（台本）を必ず入れる**（2026-10-31 オーナー指示「登壇しても完璧に話せるように」）。型と検査は `.claude/skills/shiryo-slides/workflows/speaker-notes.md`、PowerPoint で作るときは同じフォルダの `pptx.md`
 
+## 見た目の仕上げ unslop（2026-11-11 オーナー指示）
+
+- ホームページ・LP・アプリ・サイト・画面を作る／直すときは、**必ず `.claude/skills/unslop/` を使う**（github.com/heydamir/unslop、CC-BY-4.0、作者 Damir Sokolovsky、改変なし）。
+  AIっぽい見た目の点検（`references/signs.md`）と、余白→色→アイコン→文言→文字→配置→細部→絵→動き の9段の仕上げを通してから渡す
+- メッセージ送信時のフック `.claude/hooks/unslop.sh`（`.claude/settings.json` で登録）が、該当する依頼を見つけて知らせる
+- このメモのオーナーの決まり（日本語・書体・角の丸み・ボタン・改行・オレンジ・アイコンを入れない など）が unslop より優先。unslop の「方向性を確認して止まる」は行わず、1回目から仕上げて出す
+- 元は pumps-tracker-v2 の同じフォルダ。直すときは3つのリポジトリすべてを同じ中身にする
+
 ## 作業の振り分け mod（2026-10-24 オーナー指示）
 
 - `.claude/skills/model-router/`：頼まれた文を Haiku が判定し、簡単→Haiku の助手、ふつう→Sonnet の助手、難しい→Opus が自分で作業する。置くだけで毎回自動で入る
